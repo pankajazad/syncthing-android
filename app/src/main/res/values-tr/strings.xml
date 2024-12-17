@@ -233,7 +233,7 @@
     <string name="key_generation_success">Özel veri alışverişi için güvenli anahtarlar başarılı olarak üretildi.</string>
     <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır. Diğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.
 \n
-\nLütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
+\nLütfen karşılaştığınız herhangi bir sorunu GitHub aracılığıyla bildirin.</string>
     <string name="notification_permission_desc">Yeni cihaz bağlantıları, klasör paylaşım istekleri ile ilgili bildirimleri göstermek ve hizmeti canlı ve bağlı tutmak için gereklidir.</string>
     <string name="reason">Sebep:</string>
     <string name="qs_schedule_disabled">Zamanlama etkisizleştirildi</string>
@@ -300,7 +300,7 @@
     <string name="run_on_mobile_data_title">Mobil veride çalıştır</string>
     <string name="device_rejected">\"%1$s\" cihazı bağlanmak istiyor</string>
     <string name="log_to_file_title">Dosyaya günlükle</string>
-    <string name="run_on_time_schedule_summary">Bu seçeneğin etkinleştirilmesi, çalıştırma koşulları karşılanırsa ve son eşitleme 1 saatten daha uzun süre önce gerçekleşmişse, yapılandırılmış bir süre boyunca eşitlemeye çalışılacaktır. Bu, büyük miktarda pil tasarrufu sağlayabilir ancak eşitleme ortaklarının çevrimiçi olmasını gerektirir. Lütfen unutmayın: Bu, bir sonraki planlı eşitleme gerçekleşene kadar tamamlanmamış geçici dosyaların geride kalmasına neden olabilir.</string>
+    <string name="run_on_time_schedule_summary">Bu seçeneğin etkinleştirilmesi, çalıştırma koşulları karşılanırsa ve son eşitlemeden bu yana belirli bir aralık süresi geçmişse, yapılandırılmış bir süre boyunca eşitlemeye çalışılacaktır. Bu, büyük miktarda pil tasarrufu sağlayabilir ancak eşitleme ortaklarının çevrimiçi olmasını gerektirir. Lütfen unutmayın: Bu, bir sonraki planlı eşitleme gerçekleşene kadar tamamlanmamış geçici dosyaların geride kalmasına neden olabilir.</string>
     <string name="os_open_file_limit">Android Açık Dosya Sınırı</string>
     <string name="pull_order_type_alphabetic">Alfabetik</string>
     <string name="download_support_bundle_title">Destek Paketini İndir</string>
@@ -627,11 +627,11 @@
     <string name="versioning_type_external">Harici</string>
     <string name="folder_type_send_only">Yalnızca Gönder</string>
     <string name="folder_type_receive_only">Yalnızca Al</string>
-    <string name="power_source_ac_and_battery_power">Piriz ve pil gücü.</string>
+    <string name="power_source_ac_and_battery_power">Priz ve pil gücü.</string>
     <string name="versioning_type_none">Yok</string>
     <string name="folder_type_send_receive">Gönder ve Al</string>
     <string name="pull_order_largest_first">Önce En Büyük Olan</string>
-    <string name="power_source_ac_power">Piriz gücü.</string>
+    <string name="power_source_ac_power">Priz gücü.</string>
     <string name="versioning_type_simple">Basit</string>
     <string name="pull_order_random">Rastgele</string>
     <string name="pull_order_oldest_first">Önce En Eski Olan</string>
@@ -642,4 +642,5 @@
     <string name="pull_order_alphabetic">Alfabetik</string>
     <string name="power_source_battery_power">Pil gücü.</string>
     <string name="dialog_confirm_skip_ignore_doze_permission">Dikkat Edin: Eğer SyncthingNative kesintiye uğrarsa ve tuhaf bir şey yaparsa suçlu siz olursunuz. Yalnızca cihazınızın izin verilmesini desteklememesi durumunda atlayın. Gerçekten atlansın mı?</string>
+    <string name="sleep_interval_minutes_title">Eşitleme duraklatma aralığının süresi</string>
 </resources>

@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <!-- FOREGROUND_SERVICE is required since Android 9 SDK 28 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <!-- WRITE_SETTINGS, WRITE_SECURE_SETTINGS are required to disable DuraSpeed -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
@@ -88,6 +88,9 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.github.catfriend1.syncthingandroid.MainActivity.EXIT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.RecentChangesActivity"
@@ -141,7 +144,7 @@
         </activity>
         <activity
             android:name=".activities.LogActivity"
-            android:exported="false"
+            android:exported="true"
             android:parentActivityName=".activities.SettingsActivity">
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
@@ -188,7 +191,8 @@
         </activity>
         <service
             android:name=".service.SyncthingService"
-            android:foregroundServiceType="dataSync">
+            android:foregroundServiceType="specialUse">
+                <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="Syncthing is a continuous file sync app. If the user explicitly enables it running permanently in the background, it needs to monitor file changes at every time and receive or send changes made on the device or connected devices."/>
         </service>
         <service
             android:name=".service.SyncTriggerJobService"

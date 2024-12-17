@@ -21,13 +21,13 @@ PLATFORM_DIRS = {
 FORCE_DISPLAY_SYNCTHING_VERSION = ''
 FILENAME_SYNCTHING_BINARY = 'libsyncthingnative.so'
 
-GO_VERSION = '1.21.4'
-GO_EXPECTED_SHASUM_LINUX = '73cac0215254d0c7d1241fa40837851f3b9a8a742d0b54714cbdfb3feaf8f0af'
-GO_EXPECTED_SHASUM_WINDOWS = '79e5428e068c912d9cfa6cd115c13549856ec689c1332eac17f5d6122e19d595'
+GO_VERSION = '1.22.5'
+GO_EXPECTED_SHASUM_LINUX = '904b924d435eaea086515bc63235b192ea441bd8c9b198c507e85009e6e4c7f0'
+GO_EXPECTED_SHASUM_WINDOWS = '59968438b8d90f108fd240d4d2f95b037e59716995f7409e0a322dcb996e9f42'
 
-NDK_VERSION = 'r26b'
-NDK_EXPECTED_SHASUM_LINUX = 'fdf33d9f6c1b3f16e5459d53a82c7d2201edbcc4'
-NDK_EXPECTED_SHASUM_WINDOWS = '17453c61a59e848cffb8634f2c7b322417f1732e'
+NDK_VERSION = 'r27'
+NDK_EXPECTED_SHASUM_LINUX = '5e5cd517bdb98d7e0faf2c494a3041291e71bdcc'
+NDK_EXPECTED_SHASUM_WINDOWS = '0ea2756e6815356831bda3af358cce4cdb6a981e'
 
 BUILD_TARGETS = [
     {
@@ -63,11 +63,11 @@ def fail(message, *args, **kwargs):
 
 
 def get_min_sdk(project_dir):
-    with open(os.path.join(project_dir, 'app', 'build.gradle')) as file_handle:
+    with open(os.path.join(project_dir, 'app', 'build.gradle.kts')) as file_handle:
         for line in file_handle:
             tokens = list(filter(None, line.split()))
-            if len(tokens) == 2 and tokens[0] == 'minSdkVersion':
-                return int(tokens[1])
+            if len(tokens) == 3 and tokens[0] == 'minSdk':
+                return int(tokens[2])
 
     fail('Failed to find minSdkVersion')
 
@@ -316,6 +316,8 @@ syncthing_dir = os.path.join(module_dir, 'src', 'github.com', 'syncthing', 'sync
 prerequisite_tools_dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + ".." + os.path.sep + ".." + os.path.sep + "syncthing-android-prereq"
 min_sdk = get_min_sdk(project_dir)
 
+# print ('Info: min_sdk = ' + str(min_sdk))
+
 # Check if git is available.
 git_bin = which("git");
 if not git_bin:
@@ -330,7 +332,7 @@ print('git_bin=\'' + git_bin + '\'')
 # Check if go is available.
 go_bin = which("go");
 if not go_bin:
-    print('Warning: go is not available on the PATH.')
+    print('Info: go is not available on the PATH. Trying install_go')
     install_go();
     # Retry: Check if go is available.
     go_bin = which("go");
@@ -393,6 +395,12 @@ for target in BUILD_TARGETS:
     })
 
     subprocess.check_call([go_bin, 'mod', 'download'], cwd=syncthing_dir)
+    subprocess.check_call(
+                              [go_bin, 'version'],
+                              env=environ, cwd=syncthing_dir)
+    subprocess.check_call(
+                              [go_bin, 'run', 'build.go', 'version'],
+                              env=environ, cwd=syncthing_dir)
     subprocess.check_call([
                               go_bin, 'run', 'build.go', '-goos', 'android',
                               '-goarch', target['goarch'],

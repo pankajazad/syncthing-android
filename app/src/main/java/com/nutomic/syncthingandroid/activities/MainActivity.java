@@ -108,7 +108,11 @@ public class MainActivity extends SyncthingActivity
     private static final int STATUS_FRAGMENT_ID = 2;
     private static final int WIDI_FRAGMENT_ID = 3;
 
-
+    /**
+     * Intent action to exit app.
+     */
+    public static final String ACTION_EXIT =
+            "com.github.catfriend1.syncthingandroid.MainActivity.EXIT";
 
     /**
      * Time after first start when usage reporting dialog should be shown.
@@ -134,6 +138,7 @@ public class MainActivity extends SyncthingActivity
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout          mDrawerLayout;
 
+    private Intent mLastIntent;
     private Boolean oneTimeShot = true;
 
     @Inject SharedPreferences mPreferences;
@@ -282,6 +287,14 @@ public class MainActivity extends SyncthingActivity
 
         onNewIntent(getIntent());
     }
+    
+    
+    @Override
+    protected void onNewIntent(Intent intent) {
+        mLastIntent = intent;
+        super.onNewIntent(intent);
+    };
+
 
 
 
@@ -395,6 +408,16 @@ public class MainActivity extends SyncthingActivity
         }
 
         startUIRefreshHandler();
+
+        String action = mLastIntent.getAction();
+        if (action != null) {
+            if (ACTION_EXIT.equals(action)) {
+                Log.i(TAG, "Exit app requested by notification action");
+                stopService(new Intent(this, SyncthingService.class));
+                finishAndRemoveTask();
+            }
+        }
+        
         super.onResume();
     }
 
@@ -604,6 +627,7 @@ public class MainActivity extends SyncthingActivity
              */
             moveTaskToBack(true);
         }
+        super.onBackPressed();
     }
 
     /**
